@@ -1,0 +1,32 @@
+---
+layout: post
+title: "Week 2"
+subtitle: "Updates on Photoacoustic Effect Modeling"
+date: 2020-05-17 18:00:00 -0400
+background: '/img/posts/photoelectric.jpg'
+---
+
+<p>
+    This week, I focused on making improvements to the photoacoustic effect model. I also did some background reading on heat conduction and thermoelastic wave propagation so that I can work towards mathematically explaining the physics behind the model in future weeks.
+</p>
+
+<h2 class="section-heading">
+    Photoacoustic Effect Modeling
+</h2>
+
+<p>
+    Two of the main components that were added to last week’s model are the implementation of pulsed laser light rather than a steady beam of light, and boundaries that enabled the heat to flow out of the silicon diaphragm. The latter of these two involved adding another component to the model- the “backplate” of MEMs microphones. 
+</p>
+
+<h3 class="section-subheading">Pulsed Light</h3>
+
+<p>
+    The pulsed light implemented in the model has a duty cycle of 1ms and a period of 5ms. The temperature curve and magnitude of vibrations corresponding to the pulsed laser is shown below:
+</p>
+
+<img src="/img/posts/PL_t">
+
+<img src="/img/posts/PL_V">
+
+
+
