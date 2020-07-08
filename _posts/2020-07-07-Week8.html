@@ -1,0 +1,76 @@
+---
+layout: post
+title: "Week 8"
+subtitle: "Revisiting the Thermal Piston Model"
+date: 2020-07-07 18:00:00 -0400
+background: '/img/posts/week8/pressure.png'
+---
+
+<p>
+    This week, I revisited the thermal piston model and utilized Comsol modules such as laminar flow and fluid-structure interaction to model pressure changes in the air interacting with the membrane.
+</p>
+
+<h2 class="section-heading">
+    Thermal-Piston Model
+</h2>
+
+<p>
+    Due to the rotational symmetry of the membrane, we can create the thermal-piston model using two dimensional geometry in Comsol and then project that model to three dimensions when analyzing properties such as temperature, displacement, etc. 
+</p>
+
+<img src="/research/img/posts/week8/geometry.png" width=500 >
+
+<p>
+    The largest section of geometry represents a film of air, and at the bottom of the geometry, there is a membrane (larger rectangle) as well as a spring foundation (smaller rectangle). Inside the volume of air, we enable weakly compressible fluid flow- changes in density as pressure changes. After two laser pulses, the resulting pressure changes directly above the membrane, and displacement changes at the membrane are shown below: 
+</p>
+
+<img src="/research/img/posts/week8/pressure.png" width=500 >
+
+<img src="/research/img/posts/week8/displacement.png" width=500 >
+
+<p>
+    The ambient air pressure is approximately 100 kPa. When the model is run with no temperature change (static air), that air pressure holds consistent for the entire time period. Thus, the application of heat is the cause behind pressure changes.
+</p>
+
+<p>
+    The maximum displacement of the membrane approximately 1e-4. This is higher than what we saw with the generation of thermoelastic waves indicating that the thermal-piston effect is larger in magnitude. 
+</p>
+
+<p>
+    One problem with this representation of the thermal-piston model is that we assume a closed cell when in reality, the cavity that the diaphragm is located in would allow air to escape and cool air to replace warm air. Another problem with this model is that the air is weakly compressible. If we model the air as incompressible, there are no pressure changes, and if we model the air as fully compressible, the pressure changes are much higher. The best representation for the MEMs microphone is unclear, so more investigation needs to be done on which 
+</p>
+
+<h2 class="section-heading">
+    Article of the Week: Row Hammer [1] and Project Zero [2]
+</h2>
+
+<p>
+    DRAM is organized into a two dimensional array of cells, and the close proximity of each cell makes memory susceptible to disturbance errors. One exploitation of disturbance errors is <i>Row Hammer</i>, where repeated toggling of the same row of cells in memory causes charge leaks in neighboring rows. This ultimately leads to cells losing data, so attacks that exploit <i>Row Hammer</i> can change memory they are not privileged to change. This paper presents one defense, PARA, which would rely on stateless, probability-based mechanisms to periodically refresh neighboring rows if a worline is toggled. 
+</p>
+
+<p>
+    Google’s <i>Project Zero</i> has used the knowledge of the <i>Row Hammer</i> paper to show two major exploits: gaining kernel privileges when run as an unprivileged process, and escaping from the Native Client sandbox. For the first exploit, the authors of <i>Project Zero</i> found that it is possible to induce a bit flip on the page table using <i>Row Hammer</i>, and this bit flips allows attackers to gain read-write access to the page table and thus all of memory. In the second exploit, inducing a bit flip allows machine code running on Native Client to jump to unaligned addresses which may contain unsafe instructions.
+</p>
+
+<p>
+    The contents of both <i>Row Hammer</i> and <i>Project Zero</i> establish the need to resolve electromagnetic coupling issues between neighboring DRAM rows in order to guarantee the safety of computing technologies.
+</p>
+
+<h2 class="section-heading">
+    References
+</h2>
+
+<p>
+    [1] Flipping Bits in Memory Without Accessing Them: An Experimental Study of DRAM Disturbance Errors https://users.ece.cmu.edu/~yoonguk/papers/kim-isca14.pdf
+</p>
+
+<p>
+    [2] Project Zero https://googleprojectzero.blogspot.com/2015/03/exploiting-dram-rowhammer-bug-to-gain.html
+</p>
+
+
+
+
+
+
+
