@@ -1,0 +1,56 @@
+---
+layout: post
+title: "Week 9"
+subtitle: "Updates to the Thermal-Piston Model"
+date: 2020-07-14 18:00:00 -0400
+background: '/img/bg-post'
+---
+
+<h2 class="section-heading">
+    The Mystery Behind Rising Temperatures
+</h2>
+
+<p>
+    The infinite rising temperature problem that was mentioned in last week’s blog post was the focus of this past week. After comparing parameters to those derived from the ___ model, the temperature increase was still much higher than predicted, especially if the diaphragm contained a second column of air on the other side as shown below: 
+</p>
+
+<p>
+    Changing the material from air to a solid such as SiO2 decreases the measured temperature significantly. Additional improvements made to the model in an attempt to reduce temperature include increasing the length of the column of air, and marking the heat source as a gradient over the entire membrane rather than just the surface. 
+</p>
+
+<h2 class="section-heading">
+    Changing Volume
+</h2>
+
+<p>
+    If thermal expansion of the solid is removed completely from the model, there is little pressure change and displacement of the diaphragm. To address this, there are two solutions. The first is to enable compressible fluid flow since that ensures the density of air can change with temperature fluctuations. Another (more foolproof) method is to fix the volume of the model using Comsol’s global function feature. Using this method, we can directly control the volume of the air to make sure that all pressure changes come from gas expansion and contraction. 
+</p>
+
+
+<h2 class="section-heading">
+    Article of the Week: A2: Analog Malicious Hardware [1]
+</h2>
+
+<p>
+    Compared to other articles, <i>A2: Analog Malicious Hardware</i> has a unique perspective on hardware security. Rather than focusing on implementing attacks after a device is available to consumers, the threat model in this article focuses on creating attacks during the fabrication process of the supply chain. An attack performed this way has severe implications; thousands of devices can be targeted by inserting simple trigger circuits which pass undetected until customer use.
+</p>
+
+<p>
+    The design process of the A2 attack allows for great flexibility. The most important factors to consider are retention time and trigger time since both must be optimized when creating the circuit inserts onto microchips. Additionally, trigger attacks can be dependent on solely one victim wire, or a combination of wires to allow for a wide range of trigger sequences. The existing defenses performed during chip verification are not effective against A2 attacks since the trigger cannot be captured by the same method used to search for hardware Trojan attacks. So, the best defenses against A2 attacks still need to evolve with a focus on monitoring uncharacteristic chip behavior in the digital domain.
+</p>
+
+<h2 class="section-heading">
+    References
+</h2>
+
+<p>
+    [1] https://web.eecs.umich.edu/~taustin/papers/OAKLAND16-a2attack.pdf
+</p>
+
+
+
+
+
+
+
+
