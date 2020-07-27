@@ -1,0 +1,95 @@
+---
+layout: post
+title: "Week 11"
+subtitle: "Finishing the Thermal-Piston Model and Starting to Model the Combination-Deformation Effect"
+date: 2020-07-26 18:00:00 -0400
+background: '/img/bg-post'
+---
+
+<h2 class="section-heading">
+    Final Touches to the Thermal-Piston Model
+</h2>
+
+<p>
+    The final diagram of the model is shown below, with the major change from the previous blog post being the addition of a silicon backplate (very bottom section): 
+</p>
+
+<p>
+    After conducting a series of tests with the model, a major pattern that was observed is that increasing the power of the laser increases fluctuations in temperature, pressure, and displacement of the membrane, and these larger fluctuations should translate to more prominent signals on the microphone. This can help to explain why the 60 mW laser was more effective than the 5 mW laser in the LightCommands experiments. Additionally, thermal expansion does not play as important of a role in membrane oscillations as the thermal-piston effect. This was tested by changing the settings on comsol to enable and disable thermal expansion across multiple trials, and no significant differences were observed when thermal expansion was enabled. 
+</p>
+
+<p>
+    Most importantly, decreasing the frequency of the laser increases the magnitude of displacement oscillations in the diaphragm. This matches what we theoretically expected to see since greater times between laser pulses enable the heat/pressure in the system to swiftly dissipate before the subsequent pulse. 
+</p>
+
+<p>
+    The current model is able to capture the major thermal effects that could possibly be supporting the photoacoustic signal generation. One in person experiment that can quickly verify the results is to conduct the LightCommands experiments in a vacuum where the thermal-piston effect cannot occur. If there is no signal observed, then the thermal-piston model remains a strong contender. 
+</p>
+
+<h2 class="section-heading">
+    Combination-Deformation Effect
+</h2>
+
+<p>
+    After finishing the thermal-piston model, we began modeling the combination-deformation effect since it is the next most-likely source behind photoacoustics. To model this system, we look at the generation and recombination of electron-electron hole pairs in the semiconductor material. Generation is the process through which a photon is converted to electrical energy, and recombination is the opposite process where the electron and electron hole pair (the source of electrical charge) recombine. 
+</p>
+
+<p>
+    The wavelength of the laser used in the LightCommands attack would directly impact the generation rate since photon flux is proportional to the wavelength of light. Comsol allows user defined generation rates, and we take advantage of this to model electrical fluctuations in the silicon. The combination-deformation effect would be signified by a deformation of the membrane under these electrical fluctuations. The primary recombination methods chosen for this model are Auger recombination and Shockley-Read-hall recombination as they dominate in silicon-based systems (such as solar cells) [1].
+</p>
+
+<h2 class="section-heading">
+    Article of Week 10: RAMBleed: Reading Bits in Memory Without Accessing Them [2]
+</h2>
+
+<p>
+    As a continuation of the microarchitecture papers read in Week 8, RAMBleed exploits the nuances of Rowhammer [3] to create an read-only attack that circumvents the error-correcting code (ECC) defense against Rowhammer. The first step in conducting the RAMBleed attack is to achieve a desired layout of bits in memory so that the secret bit that an attacker is intending to interpret is placed in a flippable configuration. Let’s say that the attacker was able to achieve a memory pattern of SECRET-1-SECRET placed in adjacent rows of DRAM. This configuration is susceptible to flipping if the secret bit is a 0, and the configuration is less likely to flip if the secret bit is a 1. So, after hammering the middle row, the attacker can attempt to access the middle bit (a page that the attacker has privilege to access) and depending on its value, the attacker can determine the value of the secret bit. If the ECC defense has already corrected the flipped rows, the attacker can still interpret whether or not the bit flipped by analyzing the latency of accessing the bit (the more latency there is, the more likely that the bits did flip).
+</p>
+
+<p>
+    While the RAMBLeed attack is not as high-profile as Rowhammer, I found this paper to be impactful since it demonstrated how the attack could be used to find private SSH keys. The mitigations mentioned in the paper are also weak against the attack, but implementing a secure defense against RAMBleed would require compromising another component of the system such as time or user control over their system. The ramification of RAMBleed should be strongly considered for hardware that is being used in classified resources where security breaches are extremely costly. 
+</p>
+
+<h2 class="section-heading">
+    Article of Week 11: Detection of Electromagnetic Interference Attacks on Sensor Systems [4]
+</h2>
+
+<p>
+    Sensor attacks, such as the attack in Trick or Heat? [5], can have implications on a variety of devices- everything from smartphone brightness controls to temperatures of nuclear plants. Detection of Electromagnetic Interference Attacks on Sensor Systems proposes a defense to sensor attacks that cannot be guarded using physical shielding or EMI filters. This defense boils down to periodically turning the sensor to a “quiet state” in a discrete pattern that an attacker would not be able to guess. So, an attack that affects the sensor reading during the quiet state would be easily caught and corrected. 
+</p>
+
+<p>
+    While this paper does uncover a hole in the current defenses on sensor systems, the time cost of implementing the defense makes it impractical for commonplace sensors. Similar to my thoughts on defenses against RAMBleed, I think that this defense is practical only when sensor security is of utmost importance. I am also afraid that in an environment where readings naturally rapidly fluctuate, this defense would not be suitable since a “quiet state” could not be achieved without sacrificing the effectiveness of the sensor. 
+</p>
+
+<h2 class="section-heading">
+    References
+</h2>
+
+<p>
+    [1] https://www.pveducation.org/pvcdrom/pn-junctions/types-of-recombination
+</p>
+
+<p>
+    [2] https://rambleed.com/docs/20190603-rambleed-web.pdf
+</p>
+
+<p>
+    [3] https://users.ece.cmu.edu/~yoonguk/papers/kim-isca14.pdf
+</p>
+
+<p>
+    [4] https://www.cs.ox.ac.uk/files/11036/SP.pdf
+</p>
+
+<p>
+    [5] https://dl.acm.org/doi/10.1145/3319535.3354195
+</p>
+
+
+
+
+
+
+
+
